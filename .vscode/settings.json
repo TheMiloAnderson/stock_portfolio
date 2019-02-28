@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "/home/milo/.local/share/virtualenvs/stock_portfolio-xABu2V5w/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.pep8Enabled": true,
+    "python.linting.enabled": true
+}
