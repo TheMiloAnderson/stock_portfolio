@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        <nav>
-            <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/search">Search</a></li>
-            </ul>
-        </nav>
-        <main>
-            <h1>Search:</h1>
-            <form action="/search" method="POST">
-                <label>Enter a Symbol:
-                    <input name="symbol">
-                </label>
-                <button type="submit">Submit</button>
-            </form>
-        </main>                    
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Search:</h1>
+<form action="/search" method="POST">
+    <label>Enter a Symbol:
+        <input name="symbol">
+    </label>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
