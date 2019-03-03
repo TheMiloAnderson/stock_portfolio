@@ -1,0 +1,3 @@
+nav ul:before {
+    content: url("../assets/dino.png")
+}
