@@ -17,4 +17,9 @@ class Company(db.Model):
     description = db.Column(db.String(1024))
 
     def __repr__(self):
-        return '<Company {}-{}>'.format(self.symbol, self.name)
+        return {
+            'name': self.name,
+            'symbol': self.symbol,
+            'exchange': self.exchange,
+            'description': self.description
+        }

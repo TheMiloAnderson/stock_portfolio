@@ -39,4 +39,5 @@ def search_results():
 
 @app.route('/portfolio', methods=['GET'])
 def portfolio():
-    return render_template('portfolio.html'), 200
+    companies = Company.query.all()
+    return render_template('portfolio.html', companies=companies), 200
