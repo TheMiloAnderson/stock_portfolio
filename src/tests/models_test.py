@@ -14,3 +14,4 @@ def test_create_company(session):
     companies = Company.query.all()
     assert len(companies) == 1
     assert companies[0].name == 'Code Fellows'
+    assert companies[0].symbol == 'CF'
