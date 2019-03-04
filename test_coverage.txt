@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform linux -- Python 3.7.1, pytest-4.3.0, py-1.8.0, pluggy-0.9.0
+rootdir: /home/milo/codefellows/stock_portfolio, inifile:
+plugins: cov-2.6.1
+collected 6 items
+
+src/tests/models_test.py .                                               [ 16%]
+src/tests/routes_test.py .....                                           [100%]
+
+
+----------- coverage: platform linux, python 3.7.1-final-0 -----------
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+src/__init__.py                6      0   100%
+src/exceptions.py              0      0   100%
+src/models.py                 15      1    93%
+src/routes.py                 26      2    92%
+src/tests/conftest.py         31      0   100%
+src/tests/models_test.py      10      0   100%
+src/tests/routes_test.py      21      0   100%
+----------------------------------------------
+TOTAL                        109      3    97%
+
+===================== 6 passed, 6 warnings in 7.98 seconds =====================
