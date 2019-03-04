@@ -13,6 +13,7 @@ psycopg2-binary = "*"
 flask-migrate = "*"
 python-dotenv = "*"
 pytest = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.7"
