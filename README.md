@@ -13,3 +13,5 @@
 2019-02-27 6:30pm - App is rendering /home, /search, and /portfolio pages. Search returns results from iextrading API; results are saved in database
 
 2019-03-03 12:30am - database data displays on /portfolio page
+
+2019-03-04 2:00pm - unit tests for models and routes
