@@ -1,3 +1,19 @@
+body {
+    width: 90%;
+    margin: auto;
+}
+
 nav ul:before {
     content: url("../assets/dino.png")
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: block;
+    padding: 4px;
+    font-weight: bold;
+    color: navy;
 }
