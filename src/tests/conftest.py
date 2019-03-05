@@ -10,7 +10,8 @@ def app(request):
     _app.config.from_mapping(
         TESTING=True,
         SQLALCHEMY_DATABASE_URI=os.getenv('TEST_DATABASE_URL'),
-        SQLALCHEMY_TRACK_MODIFICATIONS=False
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        WTF_CSRF_ENABLED=False
     )
     ctx = _app.app_context()
     ctx.push()

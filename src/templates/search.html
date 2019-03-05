@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Search:</h1>
-<form action="/search" method="POST">
-    <label>Enter a Symbol:
-        <input name="symbol">
-    </label>
+<hr>
+<form action="{{ url_for(".search") }}" method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.symbol.label }}{{ form.symbol }}
     <button type="submit">Submit</button>
 </form>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add to Portfolio?</h1>
+<hr>
+<table>
+    <tr>
+        <td>{{ name }} ({{ symbol }})</td>
+        <td>{{ exchange }}</td>
+        <td>{{ description }}</td>
+    </tr>
+</table>
+<form action="{{ url_for(".confirm_company") }}" method="POST">
+    {{ form.hidden_tag() }}
+    <div class="hidden" hidden>
+        {{ form.name }}
+        {{ form.symbol }}
+        {{ form.exchange }}
+        {{ form.description }}
+    </div>
+    <button type="submit">Add</button>
+</form>
+{% endblock %}
