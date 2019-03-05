@@ -1,4 +1,4 @@
-from flask import render_template, abort, redirect, url_for, request, flash, session
+from flask import render_template, redirect, url_for, request, flash, session
 from sqlalchemy.exc import DBAPIError, IntegrityError
 from .forms import CompanyForm, CompanyAddForm
 from .models import db, Company
@@ -17,12 +17,16 @@ def home():
 def search():
     form = CompanyForm()
     if form.validate_on_submit():
-        symbol = request.form.get('symbol')
-        url = 'https://api.iextrading.com/1.0/stock/{}/company'.format(symbol)
-        res = requests.get(url)
-        data = json.loads(res.text)
-        session['context'] = data
-        return redirect(url_for('.confirm_company'))
+        try:
+            symbol = request.form.get('symbol')
+            url = 'https://api.iextrading.com/1.0/stock/{}/company'.format(
+                symbol)
+            res = requests.get(url)
+            data = json.loads(res.text)
+            session['context'] = data
+            return redirect(url_for('.confirm_company'), code=302)
+        except:
+            flash('No results from API, check your symbol & try again')
 
     return render_template('search.html', form=form)
 
@@ -46,11 +50,14 @@ def confirm_company():
             )
             db.session.add(company)
             db.session.commit()
-        except (DBAPIError, IntegrityError):
-            flash('Something went wrong with your search.')
-            return render_template('search.html', form=form), 200
+        except IntegrityError:
+            flash(form.data['name'] + ' is already in your Portfolio')
+            return redirect(url_for('.confirm_company'))
+        except DBAPIError as e:
+            flash(str(e.__cause__))
+            return redirect(url_for('.confirm_company'))
 
-        return redirect(url_for('.portfolio'))
+        return redirect(url_for('.portfolio'), code=302)
 
     return render_template(
         'company.html',

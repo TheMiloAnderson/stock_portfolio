@@ -1,5 +1,10 @@
 h1 {
     font-size: 2em;
+    margin-top: 10px;
+}
+
+p {
+    margin: 15px 0px;
 }
 
 table {
