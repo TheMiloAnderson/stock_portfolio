@@ -1,4 +1,5 @@
 from src.models import db as _db
+from src.models import Company, Portfolio
 from src import app as _app
 import pytest
 import os
@@ -41,8 +42,10 @@ def session(db, request):
     """ Create new DB session for testing """
     connection = db.engine.connect()
     transaction = connection.begin()
+
     options = dict(bind=connection, binds={})
     session = db.create_scoped_session(options=options)
+
     db.session = session
 
     def teardown():
@@ -52,3 +55,25 @@ def session(db, request):
 
     request.addfinalizer(teardown)
     return session
+
+
+@pytest.fixture()
+def portfolio(session):
+    portfolio = Portfolio(name='test_portfolio')
+    session.add(portfolio)
+    session.commit()
+    return portfolio
+
+
+@pytest.fixture()
+def company(session, portfolio):
+    company = Company(
+        name='Code Fellows',
+        symbol='CF',
+        exchange='Some Exchange',
+        description='We learn more faster',
+        portfolio=portfolio
+    )
+    session.add(company)
+    session.commit()
+    return company

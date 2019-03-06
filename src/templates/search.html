@@ -2,9 +2,11 @@
 {% block content %}
 <h1>Search</h1>
 <hr>
+
 {% for message in get_flashed_messages() %}
 <p class="flashed">{{ message }}</p>
 {% endfor %}
+
 {% if get_portfolios() %}
 <form action="{{ url_for(".search") }}" method="POST">
     {{ form.hidden_tag() }}
@@ -14,4 +16,5 @@
 {% else %}
 <p>Please <a href="{{ url_for(".portfolio") }}">create at least one Portfolio</a> before searching.</p>
 {% endif %}
+
 {% endblock %}
