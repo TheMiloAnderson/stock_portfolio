@@ -5,9 +5,13 @@
 {% for message in get_flashed_messages() %}
 <p class="flashed">{{ message }}</p>
 {% endfor %}
+{% if get_portfolios() %}
 <form action="{{ url_for(".search") }}" method="POST">
     {{ form.hidden_tag() }}
     {{ form.symbol.label }}{{ form.symbol }}
-    <button type="submit">Submit</button>
+    <button type="submit">Search</button>
 </form>
+{% else %}
+<p>Please <a href="{{ url_for(".portfolio") }}">create at least one Portfolio</a> before searching.</p>
+{% endif %}
 {% endblock %}
