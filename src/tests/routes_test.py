@@ -9,7 +9,7 @@ def test_home_route():
     assert b'<h1>Welcome to your future!</h1>' in res.data
 
 
-def test_search_route_get():
+def test_search_route_get(session):
     res = app.test_client().get('/search')
     assert res.status_code == 200
     assert b'<h1>Search</h1>' in res.data
@@ -35,7 +35,7 @@ def test_search_route_post():
     assert res.status_code == 302
 
 
-def test_search_bad_symbol():
+def test_search_bad_symbol(session):
     res = app.test_client().post(
         '/search',
         data={'symbol': 'BS'}
@@ -43,7 +43,7 @@ def test_search_bad_symbol():
     assert b'No results from API' in res.data
 
 
-def test_search_redirect():
+def test_search_redirect(session):
     res = app.test_client().post(
         '/search',
         data={'symbol': 'FB'},

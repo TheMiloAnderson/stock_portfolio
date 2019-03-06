@@ -2,11 +2,23 @@
 {% block content %}
 <h1>Portfolio</h1>
 <hr>
+
 {% for message in get_flashed_messages() %}
 <p class="flashed">{{ message }}</p>
 {% endfor %}
+
+<h2>Create a New Portfolio</h2>
+<form action="{{ url_for(".portfolio") }}" method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }}{{ form.name(size=15) }}
+    <button type="submit">Create</button>
+</form>
+
+<h2>Existing Portfolios</h2>
+{% for p in portfolios %}
+<h3>{{ p.name }}</h3>
 <table>
-    {% for c in companies %}
+    {% for c in p.companies %}
     <tr>
         <td>{{ c.name }} ({{ c.symbol }})</td>
         <td>{{ c.exchange }}</td>
@@ -14,4 +26,5 @@
     </tr>
     {% endfor %}
 </table>
+{% endfor %}
 {% endblock %}

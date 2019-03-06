@@ -1,11 +1,16 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from sqlalchemy.exc import DBAPIError, IntegrityError
-from .forms import CompanyForm, CompanyAddForm
-from .models import db, Company
+from .forms import CompanyForm, CompanyAddForm, PortfolioAddForm
+from .models import db, Company, Portfolio
 from . import app
 import requests
 import json
 import os
+
+
+@app.add_template_global
+def get_portfolios():
+    return Portfolio.query.all()
 
 
 @app.route('/')
@@ -46,12 +51,14 @@ def confirm_company():
                 name=form.data['name'],
                 symbol=form.data['symbol'],
                 exchange=form.data['exchange'],
-                description=form.data['description']
+                description=form.data['description'],
+                portfolio_id=form.data['portfolios']
             )
             db.session.add(company)
             db.session.commit()
-        except IntegrityError:
-            flash(form.data['name'] + ' is already in your Portfolio')
+        except IntegrityError as e:
+            # flash(form.data['name'] + ' is already in your Portfolios')
+            flash(str(e.__cause__))
             return redirect(url_for('.confirm_company'))
         except DBAPIError as e:
             flash(str(e.__cause__))
@@ -66,7 +73,19 @@ def confirm_company():
     )
 
 
-@app.route('/portfolio', methods=['GET'])
+@app.route('/portfolio', methods=['GET', 'POST'])
 def portfolio():
-    companies = Company.query.all()
-    return render_template('portfolio.html', companies=companies), 200
+    form = PortfolioAddForm()
+    if form.validate_on_submit():
+        try:
+            portfolio = Portfolio(name=form.data['name'])
+            db.session.add(portfolio)
+            db.session.commit()
+        except (DBAPIError, IntegrityError) as e:
+            flash(str(e.__cause__))
+            return redirect(url_for('.portfolio'))
+
+        return redirect(url_for('.search'))
+
+    portfolios = Portfolio.query.all()
+    return render_template('portfolio.html', portfolios=portfolios, form=form)
