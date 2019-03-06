@@ -1,25 +1,40 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.7.1, pytest-4.3.0, py-1.8.0, pluggy-0.9.0
-rootdir: /home/milo/codefellows/stock_portfolio, inifile:
+platform linux -- Python 3.7.1, pytest-4.3.0, py-1.8.0, pluggy-0.9.0 -- /home/milo/.local/share/virtualenvs/stock_portfolio-xABu2V5w/bin/python
+cachedir: .pytest_cache
+rootdir: /home/milo/codefellows/stock_portfolio/src, inifile: pytest.ini
 plugins: cov-2.6.1
-collected 9 items
+collecting ... collected 16 items
 
-src/tests/models_test.py .                                               [ 11%]
-src/tests/routes_test.py .......s                                        [100%]
-
+src/tests/models_test.py::TestCompanyModel::test_create_co PASSED        [  6%]
+src/tests/models_test.py::TestCompanyModel::test_co_data PASSED          [ 12%]
+src/tests/models_test.py::TestCompanyModel::test_co_query PASSED         [ 18%]
+src/tests/models_test.py::TestPortfolioModel::test_create_portfolio PASSED [ 25%]
+src/tests/models_test.py::TestPortfolioModel::test_portfolio_data PASSED [ 31%]
+src/tests/models_test.py::TestPortfolioModel::test_portfolio_query PASSED [ 37%]
+src/tests/models_test.py::TestCompanyPortfolioRelationship::test_co_has_port PASSED [ 43%]
+src/tests/models_test.py::TestCompanyPortfolioRelationship::test_port_has_co PASSED [ 50%]
+src/tests/routes_test.py::test_home_route PASSED                         [ 56%]
+src/tests/routes_test.py::test_search_route_get PASSED                   [ 62%]
+src/tests/routes_test.py::test_portfolio_route PASSED                    [ 68%]
+src/tests/routes_test.py::test_bad_route PASSED                          [ 75%]
+src/tests/routes_test.py::test_search_route_post PASSED                  [ 81%]
+src/tests/routes_test.py::test_search_bad_symbol PASSED                  [ 87%]
+src/tests/routes_test.py::test_search_redirect PASSED                    [ 93%]
+src/tests/routes_test.py::test_company_confirm SKIPPED                   [100%]
 
 ----------- coverage: platform linux, python 3.7.1-final-0 -----------
 Name                       Stmts   Miss  Cover
 ----------------------------------------------
 src/__init__.py                6      0   100%
 src/exceptions.py              6      1    83%
-src/forms.py                  10      0   100%
-src/models.py                 15      1    93%
-src/routes.py                 42     11    74%
-src/tests/conftest.py         31      0   100%
-src/tests/models_test.py      10      0   100%
+src/forms.py                  17      0   100%
+src/models.py                 21      0   100%
+src/routes.py                 54     19    65%
+src/tests/conftest.py         42      0   100%
+src/tests/models_test.py      31      0   100%
 src/tests/routes_test.py      35      4    89%
 ----------------------------------------------
-TOTAL                        155     17    89%
+TOTAL                        212     24    89%
 
-=============== 8 passed, 1 skipped, 12 warnings in 4.34 seconds ===============
+
+===================== 15 passed, 1 skipped in 2.24 seconds =====================

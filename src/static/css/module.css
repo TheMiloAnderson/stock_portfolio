@@ -2,3 +2,11 @@
     color: red;
     font-weight: bold;
 }
+
+table tr td:nth-child(1), table tr:nth-child(2) {
+    width: 15%
+}
+
+table tr td:nth-child(3) {
+    width: 70%
+}
