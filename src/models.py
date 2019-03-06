@@ -17,6 +17,8 @@ class Company(db.Model):
     description = db.Column(db.String(1024))
     portfolio_id = db.Column(db.ForeignKey('portfolios.id'), nullable=False)
 
+    portfolio = db.relationship('Portfolio', back_populates='companies', lazy=True)
+
 
 class Portfolio(db.Model):
     __tablename__ = 'portfolios'
@@ -25,4 +27,4 @@ class Portfolio(db.Model):
     name = db.Column(db.String(128))
     date_created = db.Column(db.DateTime, default=dt.now())
 
-    companies = db.relationship('Company', backref='portfolio', lazy=True)
+    companies = db.relationship('Company', back_populates='portfolio', lazy=True)

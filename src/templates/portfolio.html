@@ -15,8 +15,10 @@
 </form>
 
 <h2>Existing Portfolios</h2>
+{% for p in portfolios %}
+<h3>{{ p.name }}</h3>
 <table>
-    {% for c in companies %}
+    {% for c in p.companies %}
     <tr>
         <td>{{ c.name }} ({{ c.symbol }})</td>
         <td>{{ c.exchange }}</td>
@@ -24,4 +26,5 @@
     </tr>
     {% endfor %}
 </table>
+{% endfor %}
 {% endblock %}

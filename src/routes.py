@@ -86,5 +86,6 @@ def portfolio():
             return redirect(url_for('.portfolio'))
 
         return redirect(url_for('.search'))
-    companies = Company.query.all()
-    return render_template('portfolio.html', companies=companies, form=form), 200
+
+    portfolios = Portfolio.query.all()
+    return render_template('portfolio.html', portfolios=portfolios, form=form)
