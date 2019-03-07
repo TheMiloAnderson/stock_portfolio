@@ -75,8 +75,9 @@ def login():
     return render_template('auth/login.html', form=form)
 
 
+@app.route('/logout')
 @login_required
-@app.route('/logout', methods=['POST'])
 def logout():
     session.clear()
     flash('OK bye')
+    return redirect(url_for('.login'))
