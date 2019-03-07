@@ -94,5 +94,5 @@ def portfolio():
 
         return redirect(url_for('.search'))
 
-    portfolios = Portfolio.query.all()
+    portfolios = Portfolio.query.filter_by(user_id=g.user.id).all()
     return render_template('portfolio.html', portfolios=portfolios, form=form)
