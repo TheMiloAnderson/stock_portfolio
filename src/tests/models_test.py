@@ -1,10 +1,10 @@
-from src.models import Company, Portfolio
+from src.models import Company, Portfolio, User
 
 
 class TestCompanyModel():
 
     def test_create_co(self, company):
-        assert company.id > 0
+        assert company
 
     def test_co_data(self, company):
         assert company.name == 'Code Fellows'
@@ -61,3 +61,13 @@ class TestCompanyPortfolioRelationship():
         )
         assert blue.companies[0].symbol == 'CF'
         assert blue.companies[1].symbol == 'FC'
+
+
+class TestUserModel():
+
+    def test_create_user(self, user):
+        assert user
+
+    def test_user_data(self, user):
+        assert user.email == 'test@pytest.com'
+        assert user.password

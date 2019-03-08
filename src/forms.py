@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
+from flask import g
+from wtforms import StringField, SelectField, PasswordField
 from wtforms.validators import DataRequired
 from .models import Portfolio
 
@@ -17,8 +18,15 @@ class CompanyAddForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.portfolios.choices = [(str(c.id), c.name) for c in Portfolio.query.all()]
+        self.portfolios.choices = [
+            (str(c.id), c.name) for c in Portfolio.query.filter_by(user_id=g.user.id).all()
+        ]
 
 
 class PortfolioAddForm(FlaskForm):
     name = StringField('Portfolio Name: ', validators=[DataRequired()])
+
+
+class AuthForm(FlaskForm):
+    email = StringField('Email: ', validators=[DataRequired()])
+    password = PasswordField('Password: ', validators=[DataRequired()])

@@ -3,6 +3,19 @@ body {
     margin: auto;
 }
 
+header {
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+nav {
+    margin-bottom: 40px;
+}
+
+header h3 {
+    text-align: right;
+}
+
 nav ul:before {
     content: url("../assets/dino.png")
 }
@@ -14,6 +27,11 @@ nav ul li {
 nav ul li a {
     display: block;
     padding: 4px;
+    font-size: 1.4em;
     font-weight: bold;
     color: navy;
+}
+
+nav ul li a:hover {
+    color: seagreen;
 }
