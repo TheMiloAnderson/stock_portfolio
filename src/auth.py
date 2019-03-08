@@ -35,7 +35,7 @@ def register():
         if not email or not password:
             error = 'Invalid email or password'
         if User.query.filter_by(email=email).first():
-            error = f'{ email } has already been registered'
+            error = '{} has already been registered'.format(email)
 
         if not error:
             user = User(
