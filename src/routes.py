@@ -60,8 +60,10 @@ def confirm_company():
             db.session.add(company)
             db.session.commit()
         except IntegrityError as e:
-            # flash(form.data['name'] + ' is already in your Portfolios')
-            flash(str(e.__cause__))
+            if 'unique constraint "companies_pkey"' in str(e.__cause__):
+                flash('The portfolio selected already contains ' + form.data['name'])
+            else:
+                flash(str(e.__cause__))
             return redirect(url_for('.confirm_company'))
         except DBAPIError as e:
             flash(str(e.__cause__))
