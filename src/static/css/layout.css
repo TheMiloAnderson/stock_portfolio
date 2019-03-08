@@ -12,6 +12,10 @@ nav {
     margin-bottom: 40px;
 }
 
+header h3 {
+    text-align: right;
+}
+
 nav ul:before {
     content: url("../assets/dino.png")
 }

@@ -1,6 +1,7 @@
 from src.models import db as _db
-from src.models import Company, Portfolio
+from src.models import Company, Portfolio, User
 from src import app as _app
+from flask import session as flask_session
 import pytest
 import os
 
@@ -58,8 +59,41 @@ def session(db, request):
 
 
 @pytest.fixture()
-def portfolio(session):
-    portfolio = Portfolio(name='test_portfolio')
+def client(app, db, session):
+    client = app.test_client()
+    ctx = app.app_context()
+    ctx.push()
+    yield client
+    ctx.pop()
+
+
+@pytest.fixture()
+def user(session):
+    user = User(
+        email='test@pytest.com',
+        raw_pass='12345'
+    )
+    session.add(user)
+    session.commit()
+    return user
+
+
+@pytest.fixture()
+def auth_client(client, user):
+    client.post(
+        '/login',
+        data={'email': user.email, 'password': '12345'},
+        follow_redirects=True
+    )
+    return client
+
+
+@pytest.fixture()
+def portfolio(session, user):
+    portfolio = Portfolio(
+        name='test_portfolio',
+        user=user
+    )
     session.add(portfolio)
     session.commit()
     return portfolio

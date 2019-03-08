@@ -9,14 +9,14 @@ def test_home_route():
     assert b'<h1>Welcome to your future!</h1>' in res.data
 
 
-def test_search_route_get(session):
-    res = app.test_client().get('/search')
+def test_search_route_get(session, auth_client):
+    res = auth_client.get('/search')
     assert res.status_code == 200
     assert b'<h1>Search</h1>' in res.data
 
 
-def test_portfolio_route(session):
-    res = app.test_client().get('/portfolio')
+def test_portfolio_route(session, auth_client):
+    res = auth_client.get('/portfolio')
     assert res.status_code == 200
     assert b'<h1>Portfolio</h1>' in res.data
 
@@ -35,16 +35,16 @@ def test_search_route_post():
     assert res.status_code == 302
 
 
-def test_search_bad_symbol(session):
-    res = app.test_client().post(
+def test_search_bad_symbol(session, auth_client):
+    res = auth_client.post(
         '/search',
         data={'symbol': 'BS'}
     )
     assert b'No results from API' in res.data
 
 
-def test_search_redirect(session):
-    res = app.test_client().post(
+def test_search_redirect(session, auth_client):
+    res = auth_client.post(
         '/search',
         data={'symbol': 'FB'},
         follow_redirects=True
@@ -69,3 +69,18 @@ def test_company_confirm(session):
         follow_redirects=True
     )
     assert b'<h1>Portfolio</h1>' in res.data
+
+
+def test_registration_get(client):
+    res = client.get('/register')
+    assert res.status_code == 200
+    assert b'<h1>Register</h1>' in res.data
+
+
+def test_registration_redirect(client):
+    res = client.post(
+        '/register',
+        data={'email': 'py@test.com', 'password': '12345'},
+        follow_redirects=True
+    )
+    assert b'<h1>Login</h1>' in res.data

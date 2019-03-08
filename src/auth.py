@@ -54,7 +54,6 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # import pdb; pdb.set_trace()
     form = AuthForm()
     if form.validate_on_submit():
         email = form.data['email']
